@@ -133,6 +133,11 @@ nav a:focus-visible {
 }
 
 .machine {
+  /* A sized radial-gradient paints its last color stop across the rest of
+     the layer, not just the circle — the explicit "transparent 100%" stop
+     is what keeps each rivet a small dot instead of flooding the layer. */
+  --rivet: var(--brass-500), var(--brass-700) 100%, transparent 100%;
+
   position: relative;
   max-width: 22rem;
   margin: 2.75rem auto 0;
@@ -140,25 +145,14 @@ nav a:focus-visible {
   color: var(--paper);
   border-radius: 1.5rem 1.5rem 0.75rem 0.75rem;
   background-image:
-    radial-gradient(circle 3px at 1.1rem 1.1rem, var(--brass-500), var(--brass-700) 100%, transparent 100%),
-    radial-gradient(
-      circle 3px at calc(100% - 1.1rem) 1.1rem,
-      var(--brass-500),
-      var(--brass-700) 100%,
-      transparent 100%
-    ),
-    radial-gradient(
-      circle 3px at 1.1rem calc(100% - 1.1rem),
-      var(--brass-500),
-      var(--brass-700) 100%,
-      transparent 100%
-    ),
-    radial-gradient(
-      circle 3px at calc(100% - 1.1rem) calc(100% - 1.1rem),
-      var(--brass-500),
-      var(--brass-700) 100%,
-      transparent 100%
-    ),
+    radial-gradient(circle 3px at 1.1rem 1.1rem, var(--rivet)),
+    radial-gradient(circle 3px at calc(100% - 1.1rem) 1.1rem, var(--rivet)),
+    radial-gradient(circle 3px at 1.1rem calc(100% - 1.1rem), var(--rivet)),
+    radial-gradient(circle 3px at calc(100% - 1.1rem) calc(100% - 1.1rem), var(--rivet)),
+    radial-gradient(circle 3px at 1.1rem 10rem, var(--rivet)),
+    radial-gradient(circle 3px at calc(100% - 1.1rem) 10rem, var(--rivet)),
+    radial-gradient(circle 3px at 1.1rem calc(100% - 4.5rem), var(--rivet)),
+    radial-gradient(circle 3px at calc(100% - 1.1rem) calc(100% - 4.5rem), var(--rivet)),
     linear-gradient(
       180deg,
       transparent calc(10rem - 1px),
@@ -351,13 +345,19 @@ nav a:focus-visible {
 }
 
 .console {
-  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 1.25rem;
+  padding-top: 0.25rem;
+}
+
+.coin-stack {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.85rem;
-  width: 5rem;
-  padding-top: 0.25rem;
 }
 
 .machine-coin {
@@ -415,9 +415,17 @@ nav a:focus-visible {
   box-shadow: inset 1px 0 2px rgb(0 0 0 / 60%);
 }
 
-.machine-lever {
+.lever-wrap {
   position: relative;
+  display: flex;
+}
+
+.machine-lever {
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 4.5rem;
   padding: 0;
   border: none;
   background: transparent;
@@ -434,6 +442,7 @@ nav a:focus-visible {
   width: 4.5rem;
   height: 2.5rem;
   overflow: visible;
+  transform: rotate(-90deg);
   filter: drop-shadow(0 2px 3px rgb(27 30 34 / 35%));
 }
 
