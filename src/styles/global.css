@@ -240,7 +240,7 @@ nav a:focus-visible {
 
 .machine-cog-left-2 {
   top: 21rem;
-  left: -1.8rem;
+  left: -3.1rem;
 }
 
 .machine-cog-left-3 {
@@ -257,6 +257,17 @@ nav a:focus-visible {
 .machine-cog-right-2 {
   top: 21.5rem;
   right: -1.4rem;
+}
+
+/* Below ~416px the cabinet is pinned to the body's own padding edges (no
+   margin left to grow into), so the middle-left cog's >half-width poke
+   would get clipped by the viewport. Pull it back in and tuck it behind
+   the cabinet face instead of swapping to a smaller size. */
+@media (width <= 480px) {
+  .machine-cog-left-2 {
+    left: -1.4rem;
+    z-index: -1;
+  }
 }
 
 .cog-spin {
