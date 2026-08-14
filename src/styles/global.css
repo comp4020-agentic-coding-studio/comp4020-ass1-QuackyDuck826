@@ -1,11 +1,38 @@
+:root {
+  /* steel/graphite — housing, structure, neutral text */
+  --steel-900: #1b1e22;
+  --steel-700: #33383f;
+  --steel-500: #5a6169;
+  --steel-300: #8b939c;
+  --steel-100: #c7ccd1;
+
+  /* brass/copper — accents, coin, interactive fills */
+  --brass-700: #7a5327;
+  --brass-500: #b3813f;
+  --brass-300: #dcb279;
+
+  /* neutrals */
+  --paper: #eae6da;
+  --ink: var(--steel-900);
+
+  /* functional accents */
+  --danger: #b3502f;
+  --focus: #f2c14e;
+}
+
 body {
   margin: 0;
   padding: 2rem;
   overflow-x: hidden;
-  font-family: system-ui, sans-serif;
+  font-family: "Space Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
   line-height: 1.6;
-  color: #13151a;
-  background: #f4f1ea;
+  color: var(--ink);
+  background-color: var(--paper);
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgb(27 30 34 / 4%) 0 2px,
+    transparent 2px 8px
+  );
 }
 
 main {
@@ -14,7 +41,7 @@ main {
 }
 
 a {
-  color: #2f8f8a;
+  color: var(--brass-700);
 }
 
 .sr-only {
