@@ -40,8 +40,10 @@ const YEARS = [
     </p>
 
     <div class="machine" id="machine">
+      <p class="machine-marquee" aria-hidden="true">$1 ONLY</p>
+
       <div class="machine-face">
-        <label class="machine-control">
+        <label class="machine-control machine-window">
           <span>Set the year</span>
           <select id="year-dial" data-testid="year-dial">
             {
@@ -57,7 +59,14 @@ const YEARS = [
         <div class="machine-coin" aria-hidden="true">$1</div>
 
         <button id="lever" data-testid="core-interaction-trigger" class="machine-lever">
-          Pull the lever
+          <span class="sr-only">Pull the lever</span>
+          <svg class="lever-svg" viewBox="0 0 60 116" aria-hidden="true" focusable="false">
+            <rect class="lever-bracket" x="8" y="86" width="44" height="22" rx="6" />
+            <g class="lever-rod">
+              <rect x="26" y="20" width="8" height="70" rx="4" />
+              <circle class="lever-knob" cx="30" cy="18" r="15" />
+            </g>
+          </svg>
         </button>
       </div>
 
