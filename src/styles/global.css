@@ -99,11 +99,6 @@ a {
   padding: 0.6rem 0.75rem;
 }
 
-.machine-window span {
-  color: #13151a;
-  font-weight: 700;
-}
-
 .year-gauge {
   display: flex;
   flex-direction: column;
@@ -152,9 +147,10 @@ a {
   color: #13151a;
 }
 
-.gauge-buttons {
+.gauge-row {
   display: flex;
-  gap: 0.5rem;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .gauge-step {
@@ -189,9 +185,34 @@ a {
   background: #f2d885;
 }
 
+.dice-button {
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 6px solid #13151a;
+  border-radius: 0.5rem;
+  background: #e6c65c;
+  color: #13151a;
+  font-size: 1.1rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.dice-button:focus-visible {
+  outline: 3px solid #e0ccfa;
+  outline-offset: 2px;
+}
+
+.dice-button:hover {
+  background: #f2d885;
+}
+
 .machine-coin {
   position: absolute;
-  top: 9.75rem;
+  top: 5.5rem;
   right: -6rem;
   width: 3rem;
   height: 3rem;
@@ -226,8 +247,8 @@ a {
 
 .coin-slot {
   position: absolute;
-  top: 9.25rem;
-  right: 1.25rem;
+  top: 5rem;
+  right: 0.5625rem;
   width: 2rem;
   height: 4rem;
   border-radius: 0.5rem;
@@ -250,7 +271,7 @@ a {
 
 .machine-lever {
   position: absolute;
-  top: 13.5rem;
+  top: 11.5rem;
   left: calc(100% - 0.75rem);
   display: inline-flex;
   padding: 0;
@@ -265,11 +286,6 @@ a {
   border-radius: 0.5rem;
 }
 
-.machine-lever:disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
 .lever-svg {
   width: 6.5rem;
   height: 3.25rem;
@@ -279,7 +295,7 @@ a {
 .lever-bracket {
   fill: #4a4f58;
   stroke: #13151a;
-  stroke-width: 6;
+  stroke-width: 10;
   vector-effect: non-scaling-stroke;
 }
 
@@ -291,24 +307,51 @@ a {
 .lever-rod rect {
   fill: #d94f4f;
   stroke: #13151a;
-  stroke-width: 6;
+  stroke-width: 10;
   vector-effect: non-scaling-stroke;
 }
 
 .lever-knob {
   fill: #ff6b6b;
   stroke: #13151a;
-  stroke-width: 6;
+  stroke-width: 10;
   vector-effect: non-scaling-stroke;
 }
 
-.machine-lever:not(:disabled):hover .lever-knob {
+.machine-lever:hover .lever-knob {
   fill: #ff8a8a;
+}
+
+.lever-hint {
+  position: absolute;
+  top: 8.5rem;
+  left: calc(100% - 0.75rem);
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 0.4rem 0.75rem;
+  background: #13151a;
+  color: #f4f1ea;
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+  border-radius: 0.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.lever-hint.visible {
+  opacity: 1;
 }
 
 @media (width <= 28rem) {
   .machine-lever {
-    top: 12.5rem;
+    top: 10.5rem;
+    left: calc(100% - 2rem);
+  }
+
+  .lever-hint {
+    top: 7.5rem;
     left: calc(100% - 2rem);
   }
 
@@ -323,21 +366,13 @@ a {
 }
 
 .machine-tray {
-  margin-top: 1.75rem;
+  margin-top: 3.5rem;
   padding: 1rem 1.25rem 1.25rem;
   background: #13151a;
   border: 4px solid #0a0b0d;
   border-radius: 0 0 0.75rem 0.75rem;
   min-height: 3.5rem;
   clip-path: polygon(4% 0, 96% 0, 100% 100%, 0% 100%);
-}
-
-.machine-tray-label {
-  margin: 0 0 0.35rem;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #9aa0aa;
 }
 
 .machine-result {

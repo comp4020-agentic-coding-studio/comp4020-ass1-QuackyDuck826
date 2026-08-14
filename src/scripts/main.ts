@@ -5,11 +5,13 @@ const machine = document.querySelector<HTMLElement>("#machine");
 
 const coin = document.querySelector<HTMLButtonElement>("#coin");
 const coinSlot = document.querySelector<HTMLElement>(".coin-slot");
+const leverHint = document.querySelector<HTMLElement>("#lever-hint");
 
 const needle = document.querySelector<SVGLineElement>("#gauge-needle");
 const yearReadout = document.querySelector<HTMLOutputElement>("#gauge-year");
 const prevButton = document.querySelector<HTMLButtonElement>("#year-prev");
 const nextButton = document.querySelector<HTMLButtonElement>("#year-next");
+const randomButton = document.querySelector<HTMLButtonElement>("#year-random");
 
 const SCARCITY_WORDS = ["nothing", "empty", "jam", "out of stock"];
 const yearCount = dial?.options.length ?? 1;
@@ -41,8 +43,21 @@ function setIndex(newIndex: number): void {
   if (nextButton) nextButton.disabled = index === yearCount - 1;
 }
 
+let hintTimeout: number | undefined;
+
+function showLeverHint(): void {
+  if (!leverHint) return;
+
+  leverHint.textContent = "Insert coin first";
+  leverHint.classList.add("visible");
+
+  clearTimeout(hintTimeout);
+  hintTimeout = window.setTimeout(() => leverHint.classList.remove("visible"), 2500);
+}
+
 prevButton?.addEventListener("click", () => setIndex((dial?.selectedIndex ?? 0) - 1));
 nextButton?.addEventListener("click", () => setIndex((dial?.selectedIndex ?? 0) + 1));
+randomButton?.addEventListener("click", () => setIndex(Math.floor(Math.random() * yearCount)));
 
 setIndex(dial?.selectedIndex ?? 0);
 
@@ -60,12 +75,15 @@ coin?.addEventListener("click", () => {
   coin.style.setProperty("--coin-dx", `${dx}px`);
   coin.style.setProperty("--coin-dy", `${dy}px`);
   coin.classList.add("coin-inserted");
-
-  if (lever) lever.disabled = false;
 });
 
 lever?.addEventListener("click", () => {
-  if (!tray || lever.disabled) return;
+  if (!tray) return;
+
+  if (!coin?.classList.contains("coin-inserted")) {
+    showLeverHint();
+    return;
+  }
 
   const result = currentResult();
   machine?.classList.remove("machine-dispense", "machine-jam");
@@ -75,6 +93,5 @@ lever?.addEventListener("click", () => {
 
   tray.textContent = `$1 in ${dial?.value} bought: ${result}.`;
 
-  lever.disabled = true;
-  coin?.classList.remove("coin-inserted");
+  coin.classList.remove("coin-inserted");
 });

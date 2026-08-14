@@ -88,9 +88,7 @@ const ticks = YEARS.map((_, i) => {
           }
         </select>
 
-        <div class="machine-control machine-window year-gauge">
-          <span>Set the year</span>
-
+        <div class="machine-control machine-window year-gauge" aria-label="Set the year">
           <svg class="gauge-arc" viewBox="0 0 200 110" aria-hidden="true" focusable="false">
             <path class="gauge-track" d="M10,100 A90,90 0 0 1 190,100" />
             {
@@ -102,11 +100,7 @@ const ticks = YEARS.map((_, i) => {
             <circle class="gauge-pivot" cx="100" cy="100" r="5" />
           </svg>
 
-          <output id="gauge-year" class="gauge-year" aria-live="polite">
-            {YEARS[0].year}
-          </output>
-
-          <div class="gauge-buttons">
+          <div class="gauge-row">
             <button
               type="button"
               id="year-prev"
@@ -116,10 +110,17 @@ const ticks = YEARS.map((_, i) => {
             >
               ‹
             </button>
+            <output id="gauge-year" class="gauge-year" aria-live="polite">
+              {YEARS[0].year}
+            </output>
             <button type="button" id="year-next" class="gauge-step" aria-label="Next year">
               ›
             </button>
           </div>
+
+          <button type="button" id="year-random" class="dice-button" aria-label="Random year">
+            <span aria-hidden="true">🎲</span>
+          </button>
         </div>
       </div>
 
@@ -130,7 +131,7 @@ const ticks = YEARS.map((_, i) => {
         <span aria-hidden="true">$1</span>
       </button>
 
-      <button id="lever" data-testid="core-interaction-trigger" class="machine-lever" disabled>
+      <button id="lever" data-testid="core-interaction-trigger" class="machine-lever">
         <span class="sr-only">Pull the lever</span>
         <svg class="lever-svg" viewBox="0 0 120 60" aria-hidden="true" focusable="false">
           <rect class="lever-bracket" x="4" y="8" width="20" height="44" rx="6" />
@@ -141,8 +142,9 @@ const ticks = YEARS.map((_, i) => {
         </svg>
       </button>
 
+      <p id="lever-hint" class="lever-hint" role="status" aria-live="polite"></p>
+
       <div class="machine-tray">
-        <p class="machine-tray-label">Tray</p>
         <output id="tray-result" data-testid="core-interaction-result" class="machine-result">
           Insert a coin, set the year, then pull the lever.
         </output>

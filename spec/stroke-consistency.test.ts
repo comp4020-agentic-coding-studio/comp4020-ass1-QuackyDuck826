@@ -4,9 +4,12 @@ import { JSDOM } from "jsdom";
 import { describe, expect, it } from "vitest";
 
 // Style guide: every outline in the machine's artwork — the teal cabinet
-// itself, the lever, the coin, the "$1 ONLY" marquee, the "set the year"
-// window, and the gauge step buttons — should look like the same weight of
-// line on screen.
+// itself, the coin, the "$1 ONLY" marquee, the "set the year" window, and
+// the gauge step buttons — should look like the same weight of line on
+// screen. The lever is a deliberate exception: at a matching stroke-width it
+// still read as visually thinner than the rest (a small, sparse shape reads
+// lighter than a big filled one even at the same pixel weight), so it's
+// drawn heavier on purpose.
 //
 // A matching declared `stroke-width` is NOT the same thing: an SVG stroke is
 // drawn in the shape's own viewBox units, then scaled up or down to whatever
@@ -68,17 +71,14 @@ describe("assignment 1: consistent outline stroke widths", () => {
     expect(exists, "Run `pnpm build` first, or the machine isn't built yet.").toBe(true);
   });
 
-  it("draws every outline at the same pixel width on screen", () => {
+  it("draws every outline (except the lever) at the same pixel width on screen", () => {
     const css = builtCss();
     const doc = new JSDOM(readFileSync(join(distDir, "index.html"), "utf8")).window.document;
 
-    const widths = {
+    const baseline = {
       "gauge track": effectiveStrokeWidth(css, doc, ".gauge-track", "gauge-arc"),
       "gauge tick": effectiveStrokeWidth(css, doc, ".gauge-tick", "gauge-arc"),
       "gauge needle": effectiveStrokeWidth(css, doc, ".gauge-needle", "gauge-arc"),
-      "lever bracket": effectiveStrokeWidth(css, doc, ".lever-bracket", "lever-svg"),
-      "lever rod": effectiveStrokeWidth(css, doc, ".lever-rod rect", "lever-svg"),
-      "lever knob": effectiveStrokeWidth(css, doc, ".lever-knob", "lever-svg"),
       "marquee border": borderWidth(css, ".machine-marquee"),
       "year window border": borderWidth(css, ".machine-window"),
       "gauge button border": borderWidth(css, ".gauge-step"),
@@ -86,9 +86,9 @@ describe("assignment 1: consistent outline stroke widths", () => {
       "cabinet border": borderWidth(css, ".machine"),
     };
 
-    const values = Object.values(widths);
+    const values = Object.values(baseline);
     const spread = Math.max(...values) - Math.min(...values);
-    const summary = Object.entries(widths)
+    const summary = Object.entries(baseline)
       .map(([label, px]) => `${label}=${px.toFixed(2)}px`)
       .join(", ");
 
@@ -97,5 +97,28 @@ describe("assignment 1: consistent outline stroke widths", () => {
     // so this asserts they read as the same weight, not that they're
     // computed identically.
     expect(spread, `outline widths should all render within 0.5px of each other, found: ${summary}`).toBeLessThanOrEqual(0.5);
+  });
+
+  it("draws the lever heavier than the baseline outlines, on purpose", () => {
+    const css = builtCss();
+    const doc = new JSDOM(readFileSync(join(distDir, "index.html"), "utf8")).window.document;
+
+    const baselineMax = Math.max(
+      effectiveStrokeWidth(css, doc, ".gauge-track", "gauge-arc"),
+      borderWidth(css, ".machine"),
+    );
+
+    const lever = {
+      "lever bracket": effectiveStrokeWidth(css, doc, ".lever-bracket", "lever-svg"),
+      "lever rod": effectiveStrokeWidth(css, doc, ".lever-rod rect", "lever-svg"),
+      "lever knob": effectiveStrokeWidth(css, doc, ".lever-knob", "lever-svg"),
+    };
+
+    for (const [label, px] of Object.entries(lever)) {
+      expect(
+        px,
+        `${label} should render heavier than the baseline outline weight (${px.toFixed(2)}px vs ${baselineMax.toFixed(2)}px)`,
+      ).toBeGreaterThan(baselineMax);
+    }
   });
 });
