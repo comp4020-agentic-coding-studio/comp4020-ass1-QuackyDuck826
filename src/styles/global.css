@@ -208,7 +208,9 @@ nav a:focus-visible {
 .machine-cog {
   position: absolute;
   transform: translateY(-50%);
-  filter: drop-shadow(0 2px 3px rgb(27 30 34 / 35%));
+  filter:
+    drop-shadow(0 5px 6px rgb(27 30 34 / 75%))
+    drop-shadow(0 0 8px rgb(27 30 34 / 65%));
 }
 
 .machine-cog-sm {
