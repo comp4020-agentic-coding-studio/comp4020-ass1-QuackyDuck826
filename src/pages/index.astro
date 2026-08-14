@@ -124,25 +124,27 @@ const ticks = YEARS.map((_, i) => {
         </div>
       </div>
 
-      <div class="coin-slot" aria-hidden="true"></div>
+      <div class="console">
+        <div class="coin-slot" aria-hidden="true"></div>
 
-      <button type="button" id="coin" class="machine-coin">
-        <span class="sr-only">Insert coin</span>
-        <span aria-hidden="true">$1</span>
-      </button>
+        <button type="button" id="coin" class="machine-coin">
+          <span class="sr-only">Insert coin</span>
+          <span aria-hidden="true">$1</span>
+        </button>
 
-      <button id="lever" data-testid="core-interaction-trigger" class="machine-lever">
-        <span class="sr-only">Pull the lever</span>
-        <svg class="lever-svg" viewBox="0 0 120 60" aria-hidden="true" focusable="false">
-          <rect class="lever-bracket" x="4" y="8" width="20" height="44" rx="6" />
-          <g class="lever-rod">
-            <rect x="18" y="26" width="64" height="8" rx="4" />
-            <circle class="lever-knob" cx="88" cy="30" r="15" />
-          </g>
-        </svg>
-      </button>
+        <button id="lever" data-testid="core-interaction-trigger" class="machine-lever">
+          <span class="sr-only">Pull the lever</span>
+          <svg class="lever-svg" viewBox="0 0 120 60" aria-hidden="true" focusable="false">
+            <rect class="lever-bracket" x="4" y="8" width="20" height="44" rx="6" />
+            <g class="lever-rod">
+              <rect x="18" y="26" width="64" height="8" rx="4" />
+              <circle class="lever-knob" cx="88" cy="30" r="15" />
+            </g>
+          </svg>
+        </button>
 
-      <p id="lever-hint" class="lever-hint" role="status" aria-live="polite"></p>
+        <p id="lever-hint" class="lever-hint" role="status" aria-live="polite"></p>
+      </div>
 
       <div class="machine-tray">
         <output id="tray-result" data-testid="core-interaction-result" class="machine-result">
