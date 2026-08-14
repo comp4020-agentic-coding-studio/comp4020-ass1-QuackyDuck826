@@ -191,7 +191,7 @@ a {
 
 .machine-coin {
   position: absolute;
-  top: 3.75rem;
+  top: 9.75rem;
   right: -6rem;
   width: 3rem;
   height: 3rem;
@@ -226,8 +226,21 @@ a {
 
 .coin-slot {
   position: absolute;
-  top: 4rem;
+  top: 9.25rem;
   right: 1.25rem;
+  width: 2rem;
+  height: 4rem;
+  border-radius: 0.5rem;
+  background: #9aa0aa;
+  border: 6px solid #13151a;
+}
+
+.coin-slot::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 0.6rem;
   height: 2.5rem;
   border-radius: 0.3rem;
@@ -237,7 +250,7 @@ a {
 
 .machine-lever {
   position: absolute;
-  top: 7.5rem;
+  top: 13.5rem;
   left: calc(100% - 0.75rem);
   display: inline-flex;
   padding: 0;
@@ -295,7 +308,7 @@ a {
 
 @media (width <= 28rem) {
   .machine-lever {
-    top: 6.5rem;
+    top: 12.5rem;
     left: calc(100% - 2rem);
   }
 
