@@ -61,12 +61,22 @@ const ticks = YEARS.map((_, i) => {
   };
 });
 
-// Two decorative gears poking out from either side of the cabinet, as if
-// they're driving some internal mechanism. Each tooth is a rect swept
-// evenly around the body — same rotate-and-place approach as the ticks above.
+// Decorative gears poking out from either side of the cabinet, as if
+// they're driving some internal mechanism — three on the left, two on the
+// right, in three different sizes, some tucked behind the cabinet face and
+// some sitting in front of it. Each tooth is a rect swept evenly around the
+// body — same rotate-and-place approach as the ticks above. Position/size
+// per cog is set in CSS via the side/index/size classes below.
 const COG_TEETH = 8;
 const COG_CENTER = 30;
 const cogToothAngles = Array.from({ length: COG_TEETH }, (_, i) => (360 / COG_TEETH) * i);
+const COGS = [
+  { side: "left", index: 1, size: "lg" },
+  { side: "left", index: 2, size: "md" },
+  { side: "left", index: 3, size: "sm" },
+  { side: "right", index: 1, size: "md" },
+  { side: "right", index: 2, size: "sm" },
+];
 ---
 
 <Layout title="The $1 Machine">
@@ -87,45 +97,34 @@ const cogToothAngles = Array.from({ length: COG_TEETH }, (_, i) => (360 / COG_TE
     <div class="machine" id="machine">
       <p class="machine-marquee" aria-hidden="true">$1 ONLY</p>
 
-      <svg class="machine-cog machine-cog-left" viewBox="0 0 60 60" aria-hidden="true" focusable="false">
-        <g class="cog-spin">
-          <circle class="cog-body" cx="30" cy="30" r="18" />
-          {
-            cogToothAngles.map((deg) => (
-              <rect
-                class="cog-tooth"
-                x="26"
-                y="4"
-                width="8"
-                height="10"
-                rx="1.5"
-                transform={`rotate(${deg} ${COG_CENTER} ${COG_CENTER})`}
-              />
-            ))
-          }
-          <circle class="cog-hole" cx="30" cy="30" r="6" />
-        </g>
-      </svg>
-
-      <svg class="machine-cog machine-cog-right" viewBox="0 0 60 60" aria-hidden="true" focusable="false">
-        <g class="cog-spin">
-          <circle class="cog-body" cx="30" cy="30" r="18" />
-          {
-            cogToothAngles.map((deg) => (
-              <rect
-                class="cog-tooth"
-                x="26"
-                y="4"
-                width="8"
-                height="10"
-                rx="1.5"
-                transform={`rotate(${deg} ${COG_CENTER} ${COG_CENTER})`}
-              />
-            ))
-          }
-          <circle class="cog-hole" cx="30" cy="30" r="6" />
-        </g>
-      </svg>
+      {
+        COGS.map((cog) => (
+          <svg
+            class={`machine-cog machine-cog-${cog.side} machine-cog-${cog.side}-${cog.index} machine-cog-${cog.size}`}
+            viewBox="0 0 60 60"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <g class="cog-spin">
+              <circle class="cog-body" cx="30" cy="30" r="18" />
+              {
+                cogToothAngles.map((deg) => (
+                  <rect
+                    class="cog-tooth"
+                    x="26"
+                    y="4"
+                    width="8"
+                    height="10"
+                    rx="1.5"
+                    transform={`rotate(${deg} ${COG_CENTER} ${COG_CENTER})`}
+                  />
+                ))
+              }
+              <circle class="cog-hole" cx="30" cy="30" r="6" />
+            </g>
+          </svg>
+        ))
+      }
 
       <div class="machine-face">
         <select

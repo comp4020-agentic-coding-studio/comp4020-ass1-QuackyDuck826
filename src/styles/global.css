@@ -207,19 +207,55 @@ nav a:focus-visible {
 
 .machine-cog {
   position: absolute;
-  top: 10rem;
-  width: 2.75rem;
-  height: 2.75rem;
   transform: translateY(-50%);
   filter: drop-shadow(0 2px 3px rgb(27 30 34 / 35%));
 }
 
-.machine-cog-left {
-  left: -1.375rem;
+.machine-cog-sm {
+  width: 2.75rem;
+  height: 2.75rem;
 }
 
-.machine-cog-right {
-  right: -1.375rem;
+.machine-cog-md {
+  width: 3.6rem;
+  height: 3.6rem;
+}
+
+.machine-cog-lg {
+  width: 4.5rem;
+  height: 4.5rem;
+}
+
+/* Vertical band for all five cogs runs from the rivet just below the seam
+   line (10.7rem) to the rivet beside the result tray (4.5rem up from the
+   bottom) — each cog's own half-height keeps it clear of both ends. Each
+   side pokes out by a different fraction of its own width, and alternates
+   which cogs sit behind the cabinet face (z-index: -1) versus in front. */
+.machine-cog-left-1 {
+  top: 13.5rem;
+  left: -1.8rem;
+  z-index: -1;
+}
+
+.machine-cog-left-2 {
+  top: 19.5rem;
+  left: -1.95rem;
+}
+
+.machine-cog-left-3 {
+  top: 25.5rem;
+  left: -1.65rem;
+}
+
+.machine-cog-right-1 {
+  top: 15rem;
+  right: -1.6rem;
+  z-index: -1;
+}
+
+.machine-cog-right-2 {
+  top: 23rem;
+  right: -1rem;
 }
 
 .cog-spin {
