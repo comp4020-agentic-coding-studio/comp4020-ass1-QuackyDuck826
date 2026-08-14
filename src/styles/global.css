@@ -360,6 +360,10 @@ nav a:focus-visible {
   flex-direction: column;
   align-items: center;
   gap: 0.85rem;
+
+  /* Keeps the slot from sitting flush against the top of the column, so the
+     stack still looks balanced once the coin fades out after insertion. */
+  padding-top: 0.75rem;
 }
 
 .machine-coin {
@@ -427,10 +431,11 @@ nav a:focus-visible {
   align-items: center;
   justify-content: center;
 
-  /* Matches the coin-stack's height (coin-slot + gap + coin) so the lever
-     fills the same vertical band instead of looking short beside it. */
+  /* Matches the coin-stack's height (padding-top + coin-slot + gap + coin)
+     so the lever fills the same vertical band instead of looking short
+     beside it. */
   width: 3rem;
-  height: 7.1rem;
+  height: 7.85rem;
   padding: 0;
   border: none;
   background: transparent;
@@ -444,7 +449,7 @@ nav a:focus-visible {
 }
 
 .lever-svg {
-  width: 7.1rem;
+  width: 7.85rem;
   height: 3rem;
   overflow: visible;
   transform: rotate(-90deg);
