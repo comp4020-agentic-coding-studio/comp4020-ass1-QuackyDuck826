@@ -205,6 +205,39 @@ nav a:focus-visible {
     0 4px 10px rgb(27 30 34 / 35%);
 }
 
+.machine-cog {
+  position: absolute;
+  top: 10rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  transform: translateY(-50%);
+  filter: drop-shadow(0 2px 3px rgb(27 30 34 / 35%));
+}
+
+.machine-cog-left {
+  left: -1.375rem;
+}
+
+.machine-cog-right {
+  right: -1.375rem;
+}
+
+.cog-spin {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+
+.cog-body,
+.cog-tooth {
+  fill: var(--steel-500);
+  stroke: var(--steel-900);
+  stroke-width: 2;
+}
+
+.cog-hole {
+  fill: var(--steel-900);
+}
+
 .machine-face {
   position: relative;
   display: flex;
@@ -574,6 +607,16 @@ nav a:focus-visible {
   animation: lever-pull 0.5s ease;
 }
 
+.machine-dispense .machine-cog-left .cog-spin,
+.machine-jam .machine-cog-left .cog-spin {
+  animation: cog-spin 0.5s ease;
+}
+
+.machine-dispense .machine-cog-right .cog-spin,
+.machine-jam .machine-cog-right .cog-spin {
+  animation: cog-spin-reverse 0.5s ease;
+}
+
 @keyframes lever-pull {
   0% {
     transform: rotate(0deg);
@@ -585,6 +628,28 @@ nav a:focus-visible {
 
   100% {
     transform: rotate(0deg);
+  }
+}
+
+@keyframes cog-spin {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  60% {
+    transform: rotate(35deg);
+  }
+}
+
+@keyframes cog-spin-reverse {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  60% {
+    transform: rotate(-35deg);
   }
 }
 
@@ -619,7 +684,9 @@ nav a:focus-visible {
   .machine-dispense .machine-result,
   .machine-jam .machine-result,
   .machine-dispense .lever-rod,
-  .machine-jam .lever-rod {
+  .machine-jam .lever-rod,
+  .machine-dispense .cog-spin,
+  .machine-jam .cog-spin {
     animation: none;
   }
 

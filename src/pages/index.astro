@@ -60,6 +60,13 @@ const ticks = YEARS.map((_, i) => {
     y2: GAUGE_CY - TICK_OUTER * Math.sin(angleRad),
   };
 });
+
+// Two decorative gears poking out from either side of the cabinet, as if
+// they're driving some internal mechanism. Each tooth is a rect swept
+// evenly around the body — same rotate-and-place approach as the ticks above.
+const COG_TEETH = 8;
+const COG_CENTER = 30;
+const cogToothAngles = Array.from({ length: COG_TEETH }, (_, i) => (360 / COG_TEETH) * i);
 ---
 
 <Layout title="The $1 Machine">
@@ -79,6 +86,46 @@ const ticks = YEARS.map((_, i) => {
 
     <div class="machine" id="machine">
       <p class="machine-marquee" aria-hidden="true">$1 ONLY</p>
+
+      <svg class="machine-cog machine-cog-left" viewBox="0 0 60 60" aria-hidden="true" focusable="false">
+        <g class="cog-spin">
+          <circle class="cog-body" cx="30" cy="30" r="18" />
+          {
+            cogToothAngles.map((deg) => (
+              <rect
+                class="cog-tooth"
+                x="26"
+                y="4"
+                width="8"
+                height="10"
+                rx="1.5"
+                transform={`rotate(${deg} ${COG_CENTER} ${COG_CENTER})`}
+              />
+            ))
+          }
+          <circle class="cog-hole" cx="30" cy="30" r="6" />
+        </g>
+      </svg>
+
+      <svg class="machine-cog machine-cog-right" viewBox="0 0 60 60" aria-hidden="true" focusable="false">
+        <g class="cog-spin">
+          <circle class="cog-body" cx="30" cy="30" r="18" />
+          {
+            cogToothAngles.map((deg) => (
+              <rect
+                class="cog-tooth"
+                x="26"
+                y="4"
+                width="8"
+                height="10"
+                rx="1.5"
+                transform={`rotate(${deg} ${COG_CENTER} ${COG_CENTER})`}
+              />
+            ))
+          }
+          <circle class="cog-hole" cx="30" cy="30" r="6" />
+        </g>
+      </svg>
 
       <div class="machine-face">
         <select
