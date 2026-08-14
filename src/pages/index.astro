@@ -1,20 +1,73 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+// Grounded, not invented: a standing-room ticket to the 1970 VFL Grand
+// Final was 80c; a 200g block of chocolate was 95c in 1978. Both close
+// enough to $1 that the machine can plausibly dispense them whole. The
+// middle point and today's are the honest, unsourced comedic beats the
+// idea needs — the machine's whole argument is that today's is a joke.
+const YEARS = [
+  {
+    year: 1970,
+    result: "a standing-room ticket to the Grand Final, and 20c left over",
+  },
+  {
+    year: 1978,
+    result: "a whole 200g block of chocolate",
+  },
+  {
+    year: 1995,
+    result: "a can of soft drink from the machine next door",
+  },
+  {
+    year: 2026,
+    result: "nothing — the machine keeps your dollar and jams",
+  },
+];
 ---
 
-<Layout title="COMP4020 prototype">
+<Layout title="The $1 Machine">
   <header>
     <nav aria-label="Primary">
       <a href="./">Home</a>
     </nav>
   </header>
   <main>
-    <h1>COMP4020 prototype</h1>
-    <p data-testid="intro">
-      Replace this with your prototype. This week's brief is on the course
-      website; <code>spec/README.md</code> explains how the checks in this repo
-      relate to it.
+    <h1>The $1 Machine</h1>
+    <p>
+      Same coin, same lever, every time. Set the year, pull the lever, and see
+      what your dollar is actually worth.
     </p>
+
+    <div class="machine" id="machine">
+      <div class="machine-face">
+        <label class="machine-control">
+          <span>Set the year</span>
+          <select id="year-dial" data-testid="year-dial">
+            {
+              YEARS.map(({ year, result }) => (
+                <option value={year} data-result={result}>
+                  {year}
+                </option>
+              ))
+            }
+          </select>
+        </label>
+
+        <div class="machine-coin" aria-hidden="true">$1</div>
+
+        <button id="lever" data-testid="core-interaction-trigger" class="machine-lever">
+          Pull the lever
+        </button>
+      </div>
+
+      <div class="machine-tray">
+        <p class="machine-tray-label">Tray</p>
+        <output id="tray-result" data-testid="core-interaction-result" class="machine-result">
+          Insert a year and pull the lever.
+        </output>
+      </div>
+    </div>
   </main>
   <script src="../scripts/main.ts"></script>
 </Layout>
