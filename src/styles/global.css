@@ -140,13 +140,24 @@ nav a:focus-visible {
   color: var(--paper);
   border-radius: 1.5rem 1.5rem 0.75rem 0.75rem;
   background-image:
-    radial-gradient(circle 3px at 1.1rem 1.1rem, var(--brass-500), var(--brass-700)),
-    radial-gradient(circle 3px at calc(100% - 1.1rem) 1.1rem, var(--brass-500), var(--brass-700)),
-    radial-gradient(circle 3px at 1.1rem calc(100% - 1.1rem), var(--brass-500), var(--brass-700)),
+    radial-gradient(circle 3px at 1.1rem 1.1rem, var(--brass-500), var(--brass-700) 100%, transparent 100%),
+    radial-gradient(
+      circle 3px at calc(100% - 1.1rem) 1.1rem,
+      var(--brass-500),
+      var(--brass-700) 100%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle 3px at 1.1rem calc(100% - 1.1rem),
+      var(--brass-500),
+      var(--brass-700) 100%,
+      transparent 100%
+    ),
     radial-gradient(
       circle 3px at calc(100% - 1.1rem) calc(100% - 1.1rem),
       var(--brass-500),
-      var(--brass-700)
+      var(--brass-700) 100%,
+      transparent 100%
     ),
     linear-gradient(
       180deg,
