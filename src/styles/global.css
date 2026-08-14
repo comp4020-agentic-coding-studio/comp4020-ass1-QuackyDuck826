@@ -246,21 +246,26 @@ nav a:focus-visible {
 .gauge-track {
   fill: none;
   stroke: var(--steel-300);
-  stroke-width: 4;
+  stroke-width: 6;
   stroke-linecap: round;
   vector-effect: non-scaling-stroke;
 }
 
 .gauge-tick {
   stroke: var(--steel-300);
-  stroke-width: 3;
-  opacity: 0.6;
+  stroke-width: 1.5;
+  opacity: 0.5;
   vector-effect: non-scaling-stroke;
+}
+
+.gauge-tick-major {
+  stroke-width: 3.5;
+  opacity: 0.85;
 }
 
 .gauge-needle {
   stroke: var(--brass-500);
-  stroke-width: 4;
+  stroke-width: 6;
   stroke-linecap: round;
   vector-effect: non-scaling-stroke;
   transform-box: view-box;

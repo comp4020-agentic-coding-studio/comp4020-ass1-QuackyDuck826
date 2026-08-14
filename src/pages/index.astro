@@ -38,17 +38,24 @@ const YEARS = [
 
 // Tick marks for the semicircle gauge: one per year, swept evenly from 180°
 // (left, earliest year) to 0° (right, latest year) across the top half of
-// the dial. The needle uses the same angle-per-step math at runtime.
+// the dial. The needle uses the same angle-per-step math at runtime. Every
+// quarter-step (start, quarters, midpoint, end) gets a longer, bolder major
+// tick so the dial reads at a glance; the rest stay short minor ticks.
 const GAUGE_CENTER = 100;
 const GAUGE_CY = 100;
-const TICK_INNER = 74;
 const TICK_OUTER = 90;
+const TICK_INNER_MINOR = 81;
+const TICK_INNER_MAJOR = 62;
 const ANGLE_STEP = 180 / (YEARS.length - 1);
+const QUARTER_STEP = (YEARS.length - 1) / 4;
 const ticks = YEARS.map((_, i) => {
+  const isMajor = i % QUARTER_STEP === 0;
+  const tickInner = isMajor ? TICK_INNER_MAJOR : TICK_INNER_MINOR;
   const angleRad = ((180 - i * ANGLE_STEP) * Math.PI) / 180;
   return {
-    x1: GAUGE_CENTER + TICK_INNER * Math.cos(angleRad),
-    y1: GAUGE_CY - TICK_INNER * Math.sin(angleRad),
+    isMajor,
+    x1: GAUGE_CENTER + tickInner * Math.cos(angleRad),
+    y1: GAUGE_CY - tickInner * Math.sin(angleRad),
     x2: GAUGE_CENTER + TICK_OUTER * Math.cos(angleRad),
     y2: GAUGE_CY - TICK_OUTER * Math.sin(angleRad),
   };
@@ -95,7 +102,13 @@ const ticks = YEARS.map((_, i) => {
             <path class="gauge-track" d="M10,100 A90,90 0 0 1 190,100" />
             {
               ticks.map((t) => (
-                <line class="gauge-tick" x1={t.x1} y1={t.y1} x2={t.x2} y2={t.y2} />
+                <line
+                  class={`gauge-tick ${t.isMajor ? "gauge-tick-major" : ""}`}
+                  x1={t.x1}
+                  y1={t.y1}
+                  x2={t.x2}
+                  y2={t.y2}
+                />
               ))
             }
             <line id="gauge-needle" class="gauge-needle" x1="100" y1="100" x2="100" y2="18" />
