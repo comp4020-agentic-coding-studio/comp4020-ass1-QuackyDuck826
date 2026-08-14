@@ -253,13 +253,12 @@ nav a:focus-visible {
 
 .gauge-tick {
   stroke: var(--steel-300);
-  stroke-width: 1.5;
+  stroke-width: 3.5;
   opacity: 0.5;
   vector-effect: non-scaling-stroke;
 }
 
 .gauge-tick-major {
-  stroke-width: 3.5;
   opacity: 0.85;
 }
 
