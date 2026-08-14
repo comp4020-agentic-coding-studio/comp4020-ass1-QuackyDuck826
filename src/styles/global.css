@@ -275,6 +275,7 @@ nav a:focus-visible {
 .cog-spin {
   transform-box: fill-box;
   transform-origin: 50% 50%;
+  transform: rotate(var(--cog-base-rotate, 0deg));
 }
 
 .cog-body,
@@ -684,22 +685,22 @@ nav a:focus-visible {
 @keyframes cog-spin {
   0%,
   100% {
-    transform: rotate(0deg);
+    transform: rotate(var(--cog-base-rotate, 0deg));
   }
 
   60% {
-    transform: rotate(35deg);
+    transform: rotate(calc(var(--cog-base-rotate, 0deg) + 35deg));
   }
 }
 
 @keyframes cog-spin-reverse {
   0%,
   100% {
-    transform: rotate(0deg);
+    transform: rotate(var(--cog-base-rotate, 0deg));
   }
 
   60% {
-    transform: rotate(-35deg);
+    transform: rotate(calc(var(--cog-base-rotate, 0deg) - 35deg));
   }
 }
 

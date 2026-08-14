@@ -13,6 +13,15 @@ const prevButton = document.querySelector<HTMLButtonElement>("#year-prev");
 const nextButton = document.querySelector<HTMLButtonElement>("#year-next");
 const randomButton = document.querySelector<HTMLButtonElement>("#year-random");
 
+// Give each decorative cog its own random starting angle so the cluster
+// doesn't read as five copies of the same icon frozen mid-tooth-alignment.
+// The spin keyframes rotate relative to this custom property, so a lever
+// pull nudges each cog from its own random rest angle rather than snapping
+// everything back to 0deg.
+document.querySelectorAll<SVGGElement>(".cog-spin").forEach((cog) => {
+  cog.style.setProperty("--cog-base-rotate", `${Math.random() * 360}deg`);
+});
+
 const SCARCITY_WORDS = ["nothing", "empty", "jam", "out of stock"];
 const yearCount = dial?.options.length ?? 1;
 const anglePerStep = yearCount > 1 ? 180 / (yearCount - 1) : 0;
