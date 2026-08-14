@@ -4,7 +4,7 @@ body {
   overflow-x: hidden;
   font-family: system-ui, sans-serif;
   line-height: 1.6;
-  color: #1a1a1a;
+  color: #13151a;
   background: #f4f1ea;
 }
 
@@ -14,7 +14,7 @@ main {
 }
 
 a {
-  color: #0b5fff;
+  color: #2f8f8a;
 }
 
 .sr-only {
@@ -38,7 +38,9 @@ a {
   color: #f4f1ea;
   border: 6px solid #13151a;
   border-radius: 1.25rem;
-  box-shadow: 0 10px 24px rgb(0 0 0 / 30%);
+  box-shadow:
+    inset 0 -4px 0 rgb(19 21 26 / 15%),
+    0 10px 24px rgb(19 21 26 / 30%);
 }
 
 .machine::before,
@@ -67,7 +69,7 @@ a {
   transform: translateX(-50%);
   margin: 0;
   padding: 0.35rem 1.25rem;
-  background: #e6c65c;
+  background: #e8823c;
   border: 6px solid #13151a;
   border-radius: 0.75rem;
   font-weight: 800;
@@ -75,6 +77,7 @@ a {
   letter-spacing: 0.05em;
   color: #13151a;
   white-space: nowrap;
+  box-shadow: 0 4px 10px rgb(19 21 26 / 30%);
 }
 
 .machine-face {
@@ -93,10 +96,11 @@ a {
 }
 
 .machine-window {
-  background: linear-gradient(135deg, #cfefee 0%, #eafcfb 45%, #cfefee 100%);
+  background: #f4f1ea;
   border: 6px solid #13151a;
   border-radius: 0.75rem;
   padding: 0.6rem 0.75rem;
+  box-shadow: 0 3px 8px rgb(19 21 26 / 30%);
 }
 
 .year-gauge {
@@ -128,7 +132,7 @@ a {
 }
 
 .gauge-needle {
-  stroke: #ff6b6b;
+  stroke: #d94f4f;
   stroke-width: 6;
   stroke-linecap: round;
   vector-effect: non-scaling-stroke;
@@ -159,7 +163,7 @@ a {
   padding: 0;
   border: 6px solid #13151a;
   border-radius: 50%;
-  background: #e6c65c;
+  background: #e8823c;
   color: #13151a;
   font-size: 1.25rem;
   font-weight: 800;
@@ -168,21 +172,21 @@ a {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  box-shadow: 0 3px 6px rgb(19 21 26 / 30%);
 }
 
 .gauge-step:focus-visible {
-  outline: 3px solid #e0ccfa;
+  outline: 3px solid #d94f4f;
   outline-offset: 2px;
 }
 
 .gauge-step:disabled {
-  background: #9aa0aa;
   opacity: 0.6;
   cursor: not-allowed;
 }
 
 .gauge-step:hover:not(:disabled) {
-  background: #f2d885;
+  filter: brightness(0.92);
 }
 
 .dice-button {
@@ -191,7 +195,7 @@ a {
   padding: 0;
   border: 6px solid #13151a;
   border-radius: 0.5rem;
-  background: #e6c65c;
+  background: #e8823c;
   color: #13151a;
   font-size: 1.1rem;
   line-height: 1;
@@ -199,15 +203,16 @@ a {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  box-shadow: 0 3px 6px rgb(19 21 26 / 30%);
 }
 
 .dice-button:focus-visible {
-  outline: 3px solid #e0ccfa;
+  outline: 3px solid #d94f4f;
   outline-offset: 2px;
 }
 
 .dice-button:hover {
-  background: #f2d885;
+  filter: brightness(0.92);
 }
 
 .machine-coin {
@@ -220,14 +225,16 @@ a {
   padding: 0;
   border-radius: 50%;
   background: #e6c65c;
-  color: #13151a;
+  color: #e8823c;
   display: flex;
   align-items: center;
   justify-content: center;
   font: inherit;
   font-weight: 800;
-  border: 6px solid #13151a;
-  box-shadow: inset 0 -4px 0 rgb(0 0 0 / 15%);
+  border: 6px solid #e8823c;
+  box-shadow:
+    inset 0 -4px 0 rgb(232 130 60 / 15%),
+    0 4px 8px rgb(19 21 26 / 30%);
   cursor: pointer;
   transition:
     transform 0.4s ease,
@@ -235,7 +242,7 @@ a {
 }
 
 .machine-coin:focus-visible {
-  outline: 3px solid #e0ccfa;
+  outline: 3px solid #d94f4f;
   outline-offset: 3px;
 }
 
@@ -252,8 +259,9 @@ a {
   width: 2rem;
   height: 4rem;
   border-radius: 0.5rem;
-  background: #9aa0aa;
+  background: #8b93a0;
   border: 6px solid #13151a;
+  box-shadow: 0 3px 6px rgb(19 21 26 / 30%);
 }
 
 .coin-slot::before {
@@ -265,8 +273,8 @@ a {
   width: 0.6rem;
   height: 2.5rem;
   border-radius: 0.3rem;
-  background: #0a0b0d;
-  box-shadow: inset 2px 0 2px rgb(0 0 0 / 60%);
+  background: #13151a;
+  box-shadow: inset 2px 0 2px rgb(19 21 26 / 60%);
 }
 
 .machine-lever {
@@ -281,7 +289,7 @@ a {
 }
 
 .machine-lever:focus-visible {
-  outline: 3px solid #e0ccfa;
+  outline: 3px solid #d94f4f;
   outline-offset: 4px;
   border-radius: 0.5rem;
 }
@@ -290,10 +298,11 @@ a {
   width: 6.5rem;
   height: 3.25rem;
   overflow: visible;
+  filter: drop-shadow(0 3px 4px rgb(19 21 26 / 35%));
 }
 
 .lever-bracket {
-  fill: #4a4f58;
+  fill: #8b93a0;
   stroke: #13151a;
   stroke-width: 10;
   vector-effect: non-scaling-stroke;
@@ -312,14 +321,14 @@ a {
 }
 
 .lever-knob {
-  fill: #ff6b6b;
+  fill: #d94f4f;
   stroke: #13151a;
   stroke-width: 10;
   vector-effect: non-scaling-stroke;
 }
 
 .machine-lever:hover .lever-knob {
-  fill: #ff8a8a;
+  filter: brightness(1.2);
 }
 
 .lever-hint {
@@ -335,6 +344,7 @@ a {
   font-weight: 700;
   white-space: nowrap;
   border-radius: 0.5rem;
+  box-shadow: 0 3px 8px rgb(19 21 26 / 30%);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease;
@@ -369,10 +379,10 @@ a {
   margin-top: 3.5rem;
   padding: 1rem 1.25rem 1.25rem;
   background: #13151a;
-  border: 4px solid #0a0b0d;
   border-radius: 0 0 0.75rem 0.75rem;
   min-height: 3.5rem;
   clip-path: polygon(4% 0, 96% 0, 100% 100%, 0% 100%);
+  box-shadow: 0 4px 10px rgb(19 21 26 / 30%);
 }
 
 .machine-result {
@@ -387,7 +397,7 @@ a {
 }
 
 .machine-jam .machine-result {
-  color: #ff8a8a;
+  color: #d94f4f;
   animation: shake 0.3s ease;
 }
 

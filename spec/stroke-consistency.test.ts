@@ -31,9 +31,16 @@ function builtCss(): string {
   return cssFiles.map((name) => readFileSync(join(distAstroDir, name), "utf8")).join("\n");
 }
 
+// A minifier merges rules that end up with identical declarations (e.g. two
+// selectors that both resolve to the same color once the palette is small),
+// turning `.a{...}` and `.b{...}` into `.a,.b{...}`. Scan selector lists
+// rather than matching one exact selector string so that merge still resolves.
 function ruleBody(css: string, selector: string): string | null {
-  const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  return new RegExp(`(?:^|})${escaped}\\{([^}]*)}`).exec(css)?.[1] ?? null;
+  for (const match of css.matchAll(/([^{}]+)\{([^{}]*)}/g)) {
+    const [, selectorList, body] = match;
+    if (selectorList.split(",").some((part) => part.trim() === selector)) return body;
+  }
+  return null;
 }
 
 function toPx(value: string): number {
