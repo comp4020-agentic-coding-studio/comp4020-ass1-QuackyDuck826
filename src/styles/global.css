@@ -278,12 +278,12 @@ nav a:focus-visible {
 .cog-body,
 .cog-tooth {
   fill: var(--steel-500);
-  stroke: var(--steel-900);
+  stroke: var(--steel-700);
   stroke-width: 2;
 }
 
 .cog-hole {
-  fill: var(--steel-900);
+  fill: var(--steel-700);
 }
 
 .machine-face {
