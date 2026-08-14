@@ -465,7 +465,7 @@ nav a:focus-visible {
   margin: 0;
   padding: 0;
   border-radius: 50%;
-  background: radial-gradient(circle at 32% 28%, var(--brass-300) 0%, var(--brass-500) 60%, var(--brass-700) 100%);
+  background: linear-gradient(165deg, var(--brass-300) 0%, var(--brass-500) 50%, var(--brass-700) 100%);
   color: var(--brass-700);
   display: flex;
   align-items: center;
