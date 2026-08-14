@@ -149,8 +149,10 @@ nav a:focus-visible {
     radial-gradient(circle 3px at calc(100% - 1.1rem) 1.1rem, var(--rivet)),
     radial-gradient(circle 3px at 1.1rem calc(100% - 1.1rem), var(--rivet)),
     radial-gradient(circle 3px at calc(100% - 1.1rem) calc(100% - 1.1rem), var(--rivet)),
-    radial-gradient(circle 3px at 1.1rem 10rem, var(--rivet)),
-    radial-gradient(circle 3px at calc(100% - 1.1rem) 10rem, var(--rivet)),
+    radial-gradient(circle 3px at 1.1rem calc(10rem - 0.7rem), var(--rivet)),
+    radial-gradient(circle 3px at calc(100% - 1.1rem) calc(10rem - 0.7rem), var(--rivet)),
+    radial-gradient(circle 3px at 1.1rem calc(10rem + 0.7rem), var(--rivet)),
+    radial-gradient(circle 3px at calc(100% - 1.1rem) calc(10rem + 0.7rem), var(--rivet)),
     radial-gradient(circle 3px at 1.1rem calc(100% - 4.5rem), var(--rivet)),
     radial-gradient(circle 3px at calc(100% - 1.1rem) calc(100% - 4.5rem), var(--rivet)),
     linear-gradient(
@@ -424,8 +426,11 @@ nav a:focus-visible {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
-  height: 4.5rem;
+
+  /* Matches the coin-stack's height (coin-slot + gap + coin) so the lever
+     fills the same vertical band instead of looking short beside it. */
+  width: 3rem;
+  height: 7.1rem;
   padding: 0;
   border: none;
   background: transparent;
@@ -439,8 +444,8 @@ nav a:focus-visible {
 }
 
 .lever-svg {
-  width: 4.5rem;
-  height: 2.5rem;
+  width: 7.1rem;
+  height: 3rem;
   overflow: visible;
   transform: rotate(-90deg);
   filter: drop-shadow(0 2px 3px rgb(27 30 34 / 35%));
