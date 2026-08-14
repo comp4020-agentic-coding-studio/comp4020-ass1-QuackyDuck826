@@ -212,50 +212,51 @@ nav a:focus-visible {
 }
 
 .machine-cog-sm {
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 4rem;
+  height: 4rem;
 }
 
 .machine-cog-md {
-  width: 3.6rem;
-  height: 3.6rem;
+  width: 5.5rem;
+  height: 5.5rem;
 }
 
 .machine-cog-lg {
-  width: 4.5rem;
-  height: 4.5rem;
+  width: 7rem;
+  height: 7rem;
 }
 
 /* Vertical band for all five cogs runs from the rivet just below the seam
    line (10.7rem) to the rivet beside the result tray (4.5rem up from the
-   bottom) — each cog's own half-height keeps it clear of both ends. Each
-   side pokes out by a different fraction of its own width, and alternates
+   bottom) — each cluster is centred in that band with its cogs' circles
+   overlapping so they read as one tight, meshed cluster rather than five
+   separate dials. Each side pokes out by a different amount, and alternates
    which cogs sit behind the cabinet face (z-index: -1) versus in front. */
 .machine-cog-left-1 {
-  top: 13.5rem;
-  left: -1.8rem;
+  top: 16.2rem;
+  left: -1.9rem;
   z-index: -1;
 }
 
 .machine-cog-left-2 {
-  top: 19.5rem;
-  left: -1.95rem;
+  top: 21rem;
+  left: -1.8rem;
 }
 
 .machine-cog-left-3 {
-  top: 25.5rem;
-  left: -1.65rem;
+  top: 24.2rem;
+  left: -1.7rem;
 }
 
 .machine-cog-right-1 {
-  top: 15rem;
-  right: -1.6rem;
+  top: 18.2rem;
+  right: -1.75rem;
   z-index: -1;
 }
 
 .machine-cog-right-2 {
-  top: 23rem;
-  right: -1rem;
+  top: 21.5rem;
+  right: -1.4rem;
 }
 
 .cog-spin {
