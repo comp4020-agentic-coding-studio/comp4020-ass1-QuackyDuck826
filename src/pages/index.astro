@@ -1,35 +1,64 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-// One option every 5 years from 1950 to 2025, plus today (2026) as the
-// punchline. 1970 is grounded, not invented: a standing-room ticket to the
-// VFL Grand Final was 80c that year, close enough to $1 that the machine
-// can plausibly dispense it whole with change. The rest are honest,
-// unsourced comedic beats tracking the same decline — the machine's whole
-// argument is that the dollar buys steadily less, and today's is the joke.
+// Every 3 years from 1966 to 2026 — 21 entries, evenly spaced. 1966 is
+// Decimal Currency Day (14 February 1966), when Australia's pounds,
+// shillings, and pence became dollars and cents overnight (see the placard),
+// so it's the machine's true starting point, not a round number picked for
+// convenience. The results are pegged to real prices where a solid source
+// exists rather than invented figures:
+//   - 1972: McDonald's didn't open in Australia until Dec 1971; a Big Mac at
+//     the brand-new Sydney store was 49c in 1972, hence "51c left over".
+//   - 1993's "about 30c back" for a chocolate bar is the one estimate in this
+//     list without a hard source behind it — no year-by-year Australian
+//     chocolate-bar price record turned up, so it's a plausible guess, not a
+//     citation, unlike the Big Mac and postage figures below.
+//   - The basic postage stamp is the one price with a clean, continuous,
+//     citable record across the whole range (Australia Post / Wikipedia's
+//     "List of postage rates in Australia"): 4c in 1966, rising to $1.00 by
+//     2017 and $1.10 by 2020 — i.e. the exact year a stamp alone cost more
+//     than the dollar coin buying it. That crossover is used as-is below.
+//   - Milk is "a pint" only up to 1969: the metric conversion of everyday
+//     goods (pints to litres) landed in the early-to-mid 1970s, so 1972
+//     onward uses "a litre".
+// Cinema, bus-fare, and café-coffee prices don't have a clean year-by-year
+// AUD record, so those years lean on generic, non-numeric items (a chocolate
+// bar, a can of drink, a bag of lollies) rather than a specific invented
+// price. The two coffee entries (2005, 2008) are the exception — café coffee
+// was already a mainstream, price-comparable good nationally by then.
 const YEARS = [
-  { year: 1950, result: "a week's newspapers and a tram fare home, with change left over" },
-  { year: 1955, result: "a return tram fare and a bag of lollies" },
-  { year: 1960, result: "a movie ticket, a choc-top, and the bus fare home" },
-  { year: 1965, result: "a loaf of bread, a pint of milk, and a newspaper" },
   {
-    year: 1970,
-    result: "a standing-room ticket to the Grand Final, and 20c left over",
+    year: 1966,
+    result: "a loaf of bread, a pint of milk, and enough new decimal coins left over to jingle",
   },
-  { year: 1975, result: "a schooner at the pub and a packet of chips" },
-  { year: 1980, result: "a movie ticket, no choc-top this time" },
-  { year: 1985, result: "a sandwich and a can of drink" },
-  { year: 1990, result: "a loaf of bread and a stamp" },
+  { year: 1969, result: "a pint of milk, the evening paper, and a bag of mixed lollies" },
   {
-    year: 1995,
+    year: 1972,
+    result: "a Big Mac from Australia's brand-new McDonald's, with 51c left over",
+  },
+  { year: 1975, result: "a litre of milk, a loaf of bread, and a stamp to post the bill" },
+  { year: 1978, result: "a block of chocolate and a packet of chewing gum" },
+  { year: 1981, result: "a block of chocolate, and that's your lot" },
+  { year: 1984, result: "a sandwich and a can of drink" },
+  { year: 1987, result: "a loaf of bread and a stamp" },
+  {
+    year: 1990,
     result: "a can of soft drink from the machine next door",
   },
-  { year: 2000, result: "a one-zone bus ticket" },
+  { year: 1993, result: "a chocolate bar, with about 30c back" },
+  { year: 1996, result: "a bag of mixed lollies" },
+  { year: 1999, result: "a packet of chewing gum" },
+  { year: 2002, result: "a stamp and a couple of lollies" },
   { year: 2005, result: "a small coffee, if you skip the tip jar" },
-  { year: 2010, result: "half a coffee, the small one" },
-  { year: 2015, result: "a packet of chewing gum" },
-  { year: 2020, result: "a single lolly from the servo counter" },
-  { year: 2025, result: "the smell of a bakery, nothing to take home" },
+  { year: 2008, result: "half a coffee, the small one" },
+  { year: 2011, result: "a stick of chewing gum" },
+  { year: 2014, result: "a single lolly from the servo counter" },
+  { year: 2017, result: "a single stamp — the whole dollar, gone on postage" },
+  {
+    year: 2020,
+    result: "not even a stamp — postage passed a dollar first",
+  },
+  { year: 2023, result: "the smell of a bakery, nothing to take home" },
   {
     year: 2026,
     result: "nothing — the machine keeps your dollar and jams",
@@ -82,7 +111,8 @@ const COGS = [
 <Layout title="The $1 Machine">
   <header>
     <nav aria-label="Primary">
-      <a href="./">Home</a>
+      <a href="#machine">The machine</a>
+      <a href="#collected">My collection</a>
     </nav>
   </header>
   <main>
@@ -91,6 +121,14 @@ const COGS = [
       <p>
         Same coin, same lever, every time. Set the year, pull the lever, and
         see what your dollar is actually worth.
+      </p>
+      <p class="placard-history">
+        Australia didn't have dollars until 14 February 1966 — "C-Day" —
+        when pounds, shillings, and pence were retired overnight for dollars
+        and cents (the changeover was drilled into the public with a jingle,
+        <em>Dollar Bill</em>, set to the tune of <em>Click Go the Shears</em>).
+        That's this machine's starting year: everything on the dial tracks
+        the same dollar's buying power from the day it was born to today.
       </p>
     </div>
 
@@ -106,20 +144,36 @@ const COGS = [
             focusable="false"
           >
             <g class="cog-spin">
-              <circle class="cog-body" cx="30" cy="30" r="18" />
-              {
-                cogToothAngles.map((deg) => (
-                  <rect
-                    class="cog-tooth"
-                    x="26"
-                    y="4"
-                    width="8"
-                    height="10"
-                    rx="1.5"
-                    transform={`rotate(${deg} ${COG_CENTER} ${COG_CENTER})`}
-                  />
-                ))
-              }
+              <g class="cog-outline">
+                <circle cx="30" cy="30" r="18" />
+                {
+                  cogToothAngles.map((deg) => (
+                    <rect
+                      x="26"
+                      y="4"
+                      width="8"
+                      height="10"
+                      rx="1.5"
+                      transform={`rotate(${deg} ${COG_CENTER} ${COG_CENTER})`}
+                    />
+                  ))
+                }
+              </g>
+              <g class="cog-fill">
+                <circle cx="30" cy="30" r="18" />
+                {
+                  cogToothAngles.map((deg) => (
+                    <rect
+                      x="26"
+                      y="4"
+                      width="8"
+                      height="10"
+                      rx="1.5"
+                      transform={`rotate(${deg} ${COG_CENTER} ${COG_CENTER})`}
+                    />
+                  ))
+                }
+              </g>
               <circle class="cog-hole" cx="30" cy="30" r="6" />
             </g>
           </svg>
@@ -233,6 +287,43 @@ const COGS = [
         </output>
       </div>
     </div>
+
+    <div class="about">
+      <h2 class="about-heading">Why a machine</h2>
+      <p class="about-copy">
+        Inflation is normally reported as a percentage, a number small enough
+        to forget before the next headline. This machine swaps the statistic
+        for a lever: same coin, same mechanism, every time — and the tray just
+        gives you back less than it used to.
+      </p>
+      <p class="about-copy">
+        Wind the dial far enough and the joke stops being a joke. The machine
+        isn't broken; it's running the exact same trick it always has,
+        sixty years running.
+      </p>
+    </div>
+
+    <section class="collected" id="collected" aria-label="Your collected purchases">
+      <h2 class="collected-heading">Your collected purchases</h2>
+      <p class="collected-caption">
+        Every year on the dial, filled in as you go — so you can see what
+        you've tried and what you're still missing.
+      </p>
+      <div class="collected-scroll">
+        <table class="collected-table" id="collected-table" hidden>
+          <thead>
+            <tr>
+              <th scope="col">Year</th>
+              <th scope="col">What $1 bought</th>
+            </tr>
+          </thead>
+          <tbody id="collected-body"></tbody>
+        </table>
+      </div>
+      <p class="collected-status" id="collected-status" role="status" aria-live="polite"></p>
+    </section>
+
+    <p class="back-to-top"><a class="back-to-top-link" href="#top">Back to top</a></p>
   </main>
   <script src="../scripts/main.ts"></script>
 </Layout>

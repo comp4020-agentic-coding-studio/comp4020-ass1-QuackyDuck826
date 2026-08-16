@@ -20,6 +20,11 @@
   --focus: #f2c14e;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
+}
+
 body {
   margin: 0;
   padding: 2rem;
@@ -45,14 +50,23 @@ a {
 }
 
 header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  margin: -2rem -2rem 0;
   padding: 0.6rem 1.25rem;
   background: var(--steel-700);
-  box-shadow: inset 0 -3px 0 var(--brass-700);
+  box-shadow:
+    inset 0 -3px 0 var(--brass-700),
+    0 4px 10px rgb(27 30 34 / 25%);
 }
 
 nav {
   max-width: 40rem;
   margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 nav a {
@@ -117,7 +131,171 @@ nav a:focus-visible {
 }
 
 .placard p {
+  margin-bottom: 0.75rem;
+}
+
+.placard p:last-child {
   margin-bottom: 0;
+}
+
+.placard-history {
+  font-size: 0.85rem;
+  color: var(--steel-300);
+}
+
+.about {
+  position: relative;
+  margin: 2rem auto 0;
+  padding: 1.5rem 1.75rem;
+  background: var(--steel-900);
+  color: var(--paper);
+  border-radius: 0.5rem;
+  box-shadow:
+    0 8px 18px rgb(27 30 34 / 25%),
+    inset 0 0 0 1px var(--steel-700);
+}
+
+.about::before,
+.about::after {
+  content: "";
+  position: absolute;
+  top: 0.6rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--brass-500);
+  box-shadow: inset 0 1px 1px rgb(27 30 34 / 50%);
+}
+
+.about::before {
+  left: 0.6rem;
+}
+
+.about::after {
+  right: 0.6rem;
+}
+
+.about-heading {
+  margin-top: 0;
+  font-size: 1.1rem;
+  color: var(--brass-300);
+}
+
+.about-copy {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--steel-300);
+}
+
+.about-copy + .about-copy {
+  margin-top: 0.75rem;
+}
+
+.collected {
+  position: relative;
+  margin: 2rem auto 0;
+  padding: 1.5rem 1.75rem;
+  background: var(--steel-900);
+  color: var(--paper);
+  border-radius: 0.5rem;
+  box-shadow:
+    0 8px 18px rgb(27 30 34 / 25%),
+    inset 0 0 0 1px var(--steel-700);
+}
+
+.collected::before,
+.collected::after {
+  content: "";
+  position: absolute;
+  top: 0.6rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--brass-500);
+  box-shadow: inset 0 1px 1px rgb(27 30 34 / 50%);
+}
+
+.collected::before {
+  left: 0.6rem;
+}
+
+.collected::after {
+  right: 0.6rem;
+}
+
+.collected-heading {
+  margin-top: 0;
+  font-size: 1.1rem;
+  color: var(--brass-300);
+}
+
+.collected-caption {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  color: var(--steel-300);
+}
+
+.collected-scroll {
+  overflow-x: auto;
+}
+
+.collected-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.collected-table th,
+.collected-table td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--steel-700);
+}
+
+.collected-table td:last-child {
+  white-space: normal;
+}
+
+.collected-table th {
+  color: var(--brass-300);
+  font-weight: 700;
+}
+
+.collected-table tbody tr:last-child th,
+.collected-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.collected-unseen,
+.collected-unseen-year {
+  color: var(--steel-500);
+}
+
+.collected-unseen {
+  font-style: italic;
+}
+
+.collected-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.back-to-top {
+  margin: 2rem 0 0;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.back-to-top-link {
+  color: var(--steel-500);
 }
 
 .sr-only {
@@ -278,11 +456,25 @@ nav a:focus-visible {
   transform: rotate(var(--cog-base-rotate, 0deg));
 }
 
-.cog-body,
-.cog-tooth {
-  fill: var(--steel-500);
+/* Each cog is drawn as two overlapping copies of the same body+teeth shapes
+   rather than one stroked copy, so the tooth/body seams don't show as
+   internal lines. The outline layer is a single solid colour (fill and
+   stroke both steel-700) so its overlapping circle and rects read as one
+   fused silhouette, expanded past the true edge by half its stroke-width.
+   The fill layer sits exactly on the true geometry with no stroke, covering
+   every seam and leaving only that expanded margin visible — a clean outline
+   around the whole cog, not around each individual shape. */
+.cog-outline circle,
+.cog-outline rect {
+  fill: var(--steel-700);
   stroke: var(--steel-700);
-  stroke-width: 2;
+  stroke-width: 4;
+  stroke-linejoin: round;
+}
+
+.cog-fill circle,
+.cog-fill rect {
+  fill: var(--steel-500);
 }
 
 .cog-hole {
@@ -732,6 +924,10 @@ nav a:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .machine-dispense .machine-result,
   .machine-jam .machine-result,
   .machine-dispense .lever-rod,

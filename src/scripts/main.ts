@@ -22,6 +22,70 @@ document.querySelectorAll<SVGGElement>(".cog-spin").forEach((cog) => {
   cog.style.setProperty("--cog-base-rotate", `${Math.random() * 360}deg`);
 });
 
+const collectedTable = document.querySelector<HTMLTableElement>("#collected-table");
+const collectedBody = document.querySelector<HTMLElement>("#collected-body");
+const collectedStatus = document.querySelector<HTMLElement>("#collected-status");
+
+const COLLECTED_KEY = "dollar-machine:collected";
+
+type Collected = Record<string, string>;
+
+function loadCollected(): Collected {
+  try {
+    const raw = localStorage.getItem(COLLECTED_KEY);
+    return raw ? (JSON.parse(raw) as Collected) : {};
+  } catch {
+    return {};
+  }
+}
+
+function saveCollected(collected: Collected): void {
+  try {
+    localStorage.setItem(COLLECTED_KEY, JSON.stringify(collected));
+  } catch {
+    // Private browsing / quota / disabled storage — the session still works
+    // in memory, it just won't survive a reload.
+  }
+}
+
+let collected = loadCollected();
+
+function renderCollected(): void {
+  if (!collectedTable || !collectedBody) return;
+
+  const allYears = Array.from(dial?.options ?? []).map((option) => option.value);
+  collectedTable.hidden = allYears.length === 0;
+
+  collectedBody.textContent = "";
+  for (const year of allYears) {
+    const row = document.createElement("tr");
+    const yearCell = document.createElement("td");
+    yearCell.textContent = year;
+    const resultCell = document.createElement("td");
+
+    const result = collected[year];
+    if (result) {
+      resultCell.textContent = result;
+    } else {
+      resultCell.textContent = "You haven't purchased anything this year yet!";
+      resultCell.classList.add("collected-unseen");
+      yearCell.classList.add("collected-unseen-year");
+    }
+
+    row.append(yearCell, resultCell);
+    collectedBody.append(row);
+  }
+}
+
+function recordPurchase(year: string, result: string): void {
+  collected = { ...collected, [year]: result };
+  saveCollected(collected);
+  renderCollected();
+  if (collectedStatus) collectedStatus.textContent = `Added ${year} to your collection.`;
+}
+
+renderCollected();
+
 const SCARCITY_WORDS = ["nothing", "empty", "jam", "out of stock"];
 const yearCount = dial?.options.length ?? 1;
 const anglePerStep = yearCount > 1 ? 180 / (yearCount - 1) : 0;
@@ -101,6 +165,7 @@ lever?.addEventListener("click", () => {
   machine?.classList.add(isScarce(result) ? "machine-jam" : "machine-dispense");
 
   tray.textContent = `$1 in ${dial?.value} bought: ${result}.`;
+  if (dial?.value) recordPurchase(dial.value, result);
 
   coin.classList.remove("coin-inserted");
 });
