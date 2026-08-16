@@ -1,85 +1,13 @@
 # Process overview
 
-<!-- TEMPLATE: this file is a shape to fill in, not a form. Replace everything
-     in it with your own overview, and delete this comment — `pnpm
-     check:evidence` will remind you if it's still here. -->
-
-A reading-guide to how the work came together --- a map to your process, not an
-essay about it. Markers read this file and follow its citations; they don't
-trawl the repo for evidence you didn't point at, so if a moment mattered, cite
-it.
-
-This file is the shape; the course site's
-[assessment page](https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/topics/assessment/#what-you-submit)
-is the requirement, and its
-[word counts](https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/topics/assessment/#word-counts)
-cover every deliverable.
-
 ## What I built
 
-One paragraph: the thing, and the idea behind it.
+I built an interactive explainer site about the depreciating value of the australian dollar. The main feature of the website is an interactable vending machine style object that takes 1 dollar and produces what could be purchased with it in a chosen year.
 
 ## The moments that mattered
 
-Three or four for an assignment; fewer is fine for a weekly prototype. Keep the
-list short so each moment has room to do all four jobs:
+When peicing together the machine almost every single box it was constructed out of had a slightly differnt width of stroke around it that looked very messy. To solve this I got claude to write a test that checks all visible black strokes are the same width, and to make the site comply with it. This test revealed a deeper issue, that the way it was being rendered some peices were made of a differnt type of object and coudln't be effectivley assigned to the same numeric stroke width value, and had to become a special case in the test to visyaly match the rest. (this is one of two tests that are later removed for the redesign) [`ca9912d`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass1-QuackyDuck826/commit/ca9912d)
 
-1. **what happened** --- the problem, or the thing the agent got wrong
-2. **what you did instead of the obvious thing** --- the call you made, and why
-   it beat the obvious one
-3. **how you knew it was right** --- the check you ran, the viewport you looked
-   at, what you read before accepting the diff
-4. **the citation** --- a commit or commit range, a `CLAUDE.md` change, a check
-   that went from red to green, a prompt paired with the commit it produced
+In the early development stages I reached a point where the main functionality of the machine was all sorted out but to get there I had gone down a rabbit hole of bad decisions about the overall look and styling of the site and the machine itself. Making use of plan-mode I went back and forth with claude discussing a complete visual overhaul of the site, going back on my locked in decisions that had been made into tests. Allowing this redesign stage to be done all at once it allowed everything to come together much more cohesivley than before as I wasn't left making imortant visual desicions after every two things I changed functionality for. [`8081456...9881fd7`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass1-QuackyDuck826/compare/8081456...9881fd7) `![before redesign](docs/before.png)` `![after visual overhaul](docs/after.png)`
 
-Jobs 2 and 3 are the ones the repo can't tell a reader on its own, so they're
-where the marks are. The strongest moments are the ones where a correction
-landed in the **harness** rather than in another prompt --- a rule added to
-`CLAUDE.md`, a check wired up, an attempt thrown away: re-prompting until it
-passes is the routine case, and changing what the agent works against is the
-skilled one.
-
-Cite each moment as a link whose text is the commit hash or range and whose
-target is this repo's commit or compare URL, so a reader clicks straight to the
-evidence:
-
-- one commit: [`a1b2c3d`](https://github.com/YOUR-ORG/YOUR-REPO/commit/a1b2c3d)
-- a range:
-  [`a1b2c3d...e4f5a6b`](https://github.com/YOUR-ORG/YOUR-REPO/compare/a1b2c3d...e4f5a6b)
-
-To pair a prompt with the commit it produced, quote the prompt (curated, not a
-full transcript) next to the citation:
-
-> the prompt, verbatim
-
-Screenshots are welcome where one carries the verification better than a
-sentence does. Commit the file to this repo and link it with a **relative**
-path, which is what makes it render on GitHub: `![alt text](docs/before.png)`.
-Images don't count towards the word count and don't replace the citation.
-
-### A worked moment, for shape
-
-Delete this section along with the rest of the boilerplate --- it's here to show
-the four jobs in one paragraph, not to be imitated in content.
-
-> The date formatter kept coming back with `toLocaleDateString()` and no locale
-> argument, so the same build rendered differently on my machine and in CI. I'd
-> already re-prompted it twice, which fixed the line but not the habit, so the
-> third time I put the rule in `CLAUDE.md` instead
-> ([`3f9ac21`](https://github.com/YOUR-ORG/YOUR-REPO/commit/3f9ac21)) and added
-> a spec test that fails on a bare `toLocaleDateString`. That's what told me it
-> had actually taken: the test went red against the old code and green against
-> the new, and the next two features it wrote passed it without prompting
-> ([`3f9ac21...b7e0d14`](https://github.com/YOUR-ORG/YOUR-REPO/compare/3f9ac21...b7e0d14)).
-
-## Before you ship
-
-`pnpm check:evidence` verifies your citations resolve to real commits, that the
-current reflection entry is in `reflections/`, and that your `CLAUDE.md` is
-there --- before a marker ever opens the file. It checks that your map is
-traceable, not that it is good: the marker judges whether your small,
-deliberately chosen set of moments shows real judgement and reflection. A green
-check is not a substitute for that curation.
-
-Images are deliberately not checked, because whether one renders is visible the
-moment you look. Open this file on GitHub and look at it before you ship.
+When adding extra visual elemets to the machine, claude was very insistent on putting peices together in the first way it thought of, not nessecarily a good way. This resulted in drawing cogs as a circle surrounded by rectangles, each with a stroke that made them look very strange and out of place. To resolve this I decided it would be most effective to give claude options as to how it sould resolve the visual bug, in the hopes that it would be inclined to choose the easier option of the two for itself. I asked it instead make the shape as a single polygon or make the shape as is but without any stroke and copying the while thing again behind it in a darker colour to act as the outline. This was a good work around for this because if i hadnt added this other option I would have only asked the first thing that popped into my mind, the more complex polygon path, which I have since discovered is something that claude tends to struggle with pulling off convincingly. [`1ae1bb7...c5219ae`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass1-QuackyDuck826/compare/1ae1bb7...c5219ae)
